@@ -1,48 +1,90 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DETAILED_SKILLS } from '../constants';
 import Reveal from './ui/Reveal';
-import SpotlightCard from './ui/SpotlightCard';
-import { Code2, Database, Terminal } from 'lucide-react';
 import { RevealEffect } from '../types';
+import { SkillCategory } from '../types';
+import { useTheme } from '../context/ThemeContext';
 
 const Skills: React.FC = () => {
-  const getIcon = (title: string) => {
-    if (title.includes("Frontend")) return <Code2 className="h-6 w-6 text-indigo-400" />;
-    if (title.includes("Backend")) return <Database className="h-6 w-6 text-purple-400" />;
-    return <Terminal className="h-6 w-6 text-emerald-400" />;
-  };
+  const { theme } = useTheme();
+  const [skills, setSkills] = useState<SkillCategory[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000/api'}/skills`);
+        if (response.ok) {
+          const data = await response.json();
+          setSkills(data);
+        }
+      } catch (error) {
+        console.error('Error fetching skills:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSkills();
+  }, []);
+
+  const displayData = skills.length > 0 ? skills : DETAILED_SKILLS;
 
   return (
-    <section className="relative w-full py-24 px-4">
+    <section className={`relative w-full py-32 px-4 ${theme === 'light' ? 'bg-gray-50' : 'bg-zinc-950'}`}>
       <div className="mx-auto max-w-6xl">
-        <div className="mb-16 text-center">
-          <Reveal effect={RevealEffect.SLIDE}>
-            <h2 className="mb-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">Technical Expertise</h2>
-            <p className="text-zinc-400">My toolbelt for building world-class applications.</p>
-          </Reveal>
-        </div>
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {DETAILED_SKILLS.map((category, idx) => (
-            <Reveal key={idx} effect={RevealEffect.SLIDE} delay={idx * 150} className="h-full">
-              <SpotlightCard className="h-full p-8 bg-zinc-900/40 border-zinc-800/60">
-                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-zinc-800/50 ring-1 ring-zinc-700">
-                  {getIcon(category.title)}
-                </div>
-                <h3 className="mb-4 text-xl font-bold text-white">{category.title}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {category.items.map((skill) => (
-                    <span 
-                      key={skill} 
-                      className="rounded-md border border-zinc-700 bg-zinc-800/30 px-3 py-1 text-sm text-zinc-300 transition-colors hover:border-indigo-500/50 hover:text-white"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </SpotlightCard>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          
+          {/* Left: Title */}
+          <div className="lg:col-span-3">
+            <Reveal effect={RevealEffect.SLIDE}>
+              <h2 className={`text-4xl font-bold tracking-tight leading-tight ${
+                theme === 'dark' ? 'text-white' : 'text-zinc-900'
+              }`}>
+                TECHNICAL<br />SKILLS<span className="text-indigo-500">.</span>
+              </h2>
+              <div className="mt-4 w-12 h-1 bg-zinc-700"></div>
+              <p className={`mt-6 text-sm leading-relaxed ${
+                theme === 'dark' ? 'text-zinc-500' : 'text-zinc-600'
+              }`}>
+                A toolkit refined over years of building scalable applications and immersive web experiences.
+              </p>
             </Reveal>
-          ))}
+          </div>
+
+          {/* Right: Skills Grid */}
+          <div className="lg:col-span-9">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-12">
+              {displayData.map((category, idx) => (
+                <Reveal key={idx} effect={RevealEffect.FADE} delay={idx * 100}>
+                  <div>
+                    <h3 className={`text-xs font-semibold uppercase tracking-wider mb-6 ${
+                      theme === 'dark' ? 'text-zinc-500' : 'text-zinc-500'
+                    }`}>
+                      {category.title}
+                    </h3>
+                    <ul className="space-y-4">
+                      {category.items.map((skill, skillIdx) => (
+                        <li 
+                          key={skill}
+                          className={`flex items-center gap-3 text-base transition-colors duration-200 ${
+                            theme === 'dark' 
+                              ? 'text-zinc-300 hover:text-white' 
+                              : 'text-zinc-700 hover:text-zinc-900'
+                          }`}
+                        >
+                          <span className={`w-1.5 h-1.5 rounded-full ${
+                            theme === 'dark' ? 'bg-zinc-600' : 'bg-zinc-400'
+                          }`}></span>
+                          {skill}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

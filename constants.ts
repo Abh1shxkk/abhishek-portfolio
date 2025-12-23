@@ -20,35 +20,27 @@ Experience Years: 1+ Years
 export const PROJECTS: Project[] = [
   {
     id: 1,
-    title: "Nebula Dashboard",
-    category: "SaaS Platform",
-    description: "A high-performance analytics dashboard processing millions of data points in real-time.",
+    title: "Skills360.ai",
+    category: "Web Application",
+    description: "A Laravel-based platform featuring user authentication, an intuitive admin panel, AI-powered job matching, and a built-in resume builder to streamline the hiring and job search experience.",
     image: "https://picsum.photos/800/600?random=1",
-    tags: ["React", "D3.js", "WebSockets"]
+    tags: ["Laravel", "Tailwind CSS"]
   },
   {
     id: 2,
-    title: "Aether Lens",
-    category: "AI Application",
-    description: "Image recognition tool helping researchers identify rare botanical species.",
+    title: "Medi BillSuite",
+    category: "Web Application",
+    description: "A Laravel-based billing solution with GST calculations, inventory tracking, customer/supplier management, quotations, sales reports, and role-based user permissions.",
     image: "https://picsum.photos/800/600?random=2",
-    tags: ["Python", "TensorFlow", "React Native"]
+    tags: ["Laravel", "Tailwind CSS"]
   },
   {
     id: 3,
-    title: "Chronos Commerce",
-    category: "E-commerce",
-    description: "Headless e-commerce solution with sub-second page loads and 3D product previews.",
+    title: "InvoicePro",
+    category: "Web Application",
+    description: "A Laravel-based invoicing platform featuring user authentication, role-based admin panel, client management, invoice generation with PDF export, expense tracking, payment management, and detailed financial reports (Revenue, Expenses, Profit/Loss) to streamline business billing and financial operations.",
     image: "https://picsum.photos/800/600?random=3",
-    tags: ["Next.js", "Three.js", "Shopify"]
-  },
-  {
-    id: 4,
-    title: "Lumina UI Kit",
-    category: "Open Source",
-    description: "A comprehensive React component library focused on accessibility and animation.",
-    image: "https://picsum.photos/800/600?random=4",
-    tags: ["TypeScript", "Storybook", "A11y"]
+    tags: ["Laravel", "Tailwind CSS"]
   }
 ];
 
@@ -110,7 +102,7 @@ export const EDUCATION_HISTORY: EducationItem[] = [
   {
     id: 1,
     degree: "Bachelor of Engineering Technology",
-    school: "Meerut Institute of Engineering & Technology",
+    school: "IIMT University",
     year: "2025",
     description: "Computer Science"
   },
@@ -118,19 +110,20 @@ export const EDUCATION_HISTORY: EducationItem[] = [
     id: 2,
     degree: "Intermediate",
     school: "R S M S Vidya Mandir",
-    year: "2020",
+    year: "2021",
     description: "PCM"
   },
   {
     id: 3,
     degree: "High School",
     school: "R S M S Vidya Mandir",
-    year: "2018",
+    year: "2019",
     description: ""
   }
 ];
 
 export const SOCIALS: SocialLink[] = [
-  { platform: "GitHub", url: "https://github.com/Abh1shxkk", username: "@abh1shxkk" },
-  { platform: "Twitter", url: "https://twitter.com/abh1shxkk", username: "@abh1shxkk" },
+  { platform: "GitHub", url: "https://github.com/Abh1shxkk", username: "@Abh1shxkk" },
+  { platform: "LinkedIn", url: "https://www.linkedin.com/in/abhishek-chauhan-880496394", username: "@abhishekchauhan" },
+  { platform: "Twitter", url: "https://x.com/abh1shxkk", username: "@abh1shxkk" },
 ];

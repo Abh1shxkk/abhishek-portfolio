@@ -3,47 +3,30 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Profile;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $profile = Profile::first();
+        
+        if (!$profile) {
+            return response()->json([
+                'bio' => 'Computer Science Engineering graduate with hands-on experience in Laravel, PHP, JavaScript, and WordPress-based frontend development.',
+                'location' => 'Meerut, UP',
+                'experience' => '1+ Years',
+                'availability' => 'Open',
+                'avatar' => null
+            ]);
+        }
+        
+        return response()->json([
+            'bio' => $profile->bio,
+            'location' => $profile->location,
+            'experience' => $profile->years_experience,
+            'availability' => $profile->availability,
+            'avatar' => $profile->avatar
+        ]);
     }
 }

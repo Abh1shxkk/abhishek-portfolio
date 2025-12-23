@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('tagline')->nullable();
             $table->string('availability')->default('Open');
             $table->string('years_experience')->default('1+');
+            $table->string('avatar')->nullable();
             $table->string('resume_url')->nullable();
             $table->string('github_url')->nullable();
             $table->timestamps();
