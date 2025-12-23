@@ -41,8 +41,8 @@ const Experience: React.FC = () => {
       id: 1,
       company: 'Global Matrix Solution',
       role: 'Full Stack Developer',
-      duration: 'September 2025 — Present',
-      description: 'Building and maintaining dynamic full-stack applications using Laravel, PHP, JavaScript, and WordPress. Delivered key projects including Skills360.ai (job-seeking platform), Medi BillSuite (billing & inventory management), and InvoicePro (invoice & expense management). Focused on performance optimization, responsive UI, real-time features, and SEO-friendly development to enhance overall user experience.',
+      duration: 'June 2024 — Present',
+      description: 'Building and maintaining dynamic full-stack applications using Laravel, PHP, JavaScript, and React. Delivered key projects including Skills360.ai (job-seeking platform), Medi BillSuite (billing & inventory management), and InvoicePro (invoice & expense management). Focused on performance optimization, responsive UI, real-time features, and SEO-friendly development to enhance overall user experience.',
       technologies: ['Laravel', 'JavaScript', 'Tailwind CSS', 'React']
     }
   ];

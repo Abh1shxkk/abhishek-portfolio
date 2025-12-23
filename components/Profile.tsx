@@ -36,9 +36,9 @@ const Profile: React.FC = () => {
   }, []);
 
   const displayData: ProfileData = profile || {
-    bio: 'Computer Science Engineering graduate with hands-on experience in Laravel, PHP, JavaScript, and WordPress-based frontend development. Skilled in building responsive and dynamic web applications with a strong foundation in data structures, algorithms, and problem-solving. Currently expanding expertise in backend development, focusing on databases, APIs, and server-side programming, with the goal of transitioning into a backend engineering role.',
+    bio: 'Computer Science Engineering graduate with hands-on experience in Laravel, PHP, JavaScript, and React-based frontend development. Skilled in building responsive and dynamic web applications with a strong foundation in data structures, algorithms, and problem-solving. Currently expanding expertise in backend development, focusing on databases, APIs, and server-side programming, with the goal of transitioning into a backend engineering role.',
     location: 'Meerut, UP',
-    experience: '1+ Years',
+    experience: '6+ Months',
     availability: 'Open'
   };
 
