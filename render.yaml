@@ -1,0 +1,11 @@
+# Render Blueprint for Portfolio
+services:
+  # Frontend - Static Site
+  - type: web
+    name: abhishek-portfolio
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://your-laravel-api.onrender.com/api
