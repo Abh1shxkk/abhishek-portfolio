@@ -14,6 +14,14 @@ class PortfolioSeeder extends Seeder
 {
     public function run(): void
     {
+        // Clear existing data first
+        Profile::truncate();
+        Experience::truncate();
+        Skill::truncate();
+        Project::truncate();
+        Education::truncate();
+        SocialLink::truncate();
+
         // Profile
         Profile::create([
             'name' => 'Abhishek Chauhan',
@@ -21,10 +29,11 @@ class PortfolioSeeder extends Seeder
             'location' => 'Meerut, UP',
             'email' => 'abhichauhan200504@gmail.com',
             'phone' => '+91 8279422813',
-            'bio' => 'Computer Science Engineering graduate with hands-on experience in Laravel, PHP, JavaScript, and WordPress-based frontend development. Skilled in building responsive and dynamic web applications with a strong foundation in data structures, algorithms, and problem-solving. Currently expanding expertise in backend development, focusing on databases, APIs, and server-side programming, with the goal of transitioning into a backend engineering role.',
+            'bio' => '🚀 Computer Science Engineering graduate with hands-on experience in Laravel, PHP, JavaScript, and React-based frontend development. Skilled in building responsive and dynamic web applications with a strong foundation in data structures, algorithms, and problem-solving. Currently expanding expertise in backend development, focusing on databases, APIs, and server-side programming, with the goal of transitioning into a backend engineering role.',
             'availability' => 'Open',
-            'years_experience' => '1+ Years',
-            'avatar' => 'https://res.cloudinary.com/dfsdezrkr/image/upload/v1766513936/image_3_sesdcl.png'
+            'years_experience' => '6+ Months',
+            'avatar' => 'https://res.cloudinary.com/dfsdezrkr/image/upload/v1766513936/image_3_sesdcl.png',
+            'resume_url' => 'https://abhishek-portfolio-kfdk.onrender.com/resume.pdf'
         ]);
 
         // Experience
@@ -32,7 +41,7 @@ class PortfolioSeeder extends Seeder
             'position' => 'Full Stack Developer',
             'company' => 'Global Matrix Solution',
             'duration' => 'September 2025 — Present',
-            'description' => 'Building and maintaining dynamic full-stack applications using Laravel, PHP, JavaScript, and WordPress. Delivered key projects including Skills360.ai (job-seeking platform), Medi BillSuite (billing & inventory management), and InvoicePro (invoice & expense management). Focused on performance optimization, responsive UI, real-time features, and SEO-friendly development to enhance overall user experience.',
+            'description' => 'Building and maintaining dynamic full-stack applications using Laravel, PHP, JavaScript, and React. Delivered key projects including Skills360.ai (job-seeking platform), Medi BillSuite (billing & inventory management), and InvoicePro (invoice & expense management). Focused on performance optimization, responsive UI, real-time features, and SEO-friendly development to enhance overall user experience.',
             'tags' => ['Laravel', 'JavaScript', 'Tailwind CSS', 'React'],
             'order' => 1
         ]);

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { EDUCATION_HISTORY } from '../constants';
 import Reveal from './ui/Reveal';
 import { GraduationCap } from 'lucide-react';
 import { RevealEffect, EducationItem } from '../types';
@@ -28,7 +27,21 @@ const Education: React.FC = () => {
     fetchEducation();
   }, []);
 
-  const displayData = education.length > 0 ? education : EDUCATION_HISTORY;
+  if (loading) {
+    return (
+      <section id="education" className={`relative w-full py-24 px-4 ${
+        theme === 'dark' ? 'bg-zinc-900/30' : 'bg-gray-50'
+      }`}>
+        <div className="mx-auto max-w-4xl flex justify-center">
+          <div className="animate-pulse text-zinc-500">Loading education...</div>
+        </div>
+      </section>
+    );
+  }
+
+  if (education.length === 0) {
+    return null;
+  }
 
   return (
     <section id="education" className={`relative w-full py-24 px-4 ${
@@ -51,7 +64,7 @@ const Education: React.FC = () => {
         <div className={`relative border-l ml-6 ${
           theme === 'dark' ? 'border-zinc-800' : 'border-gray-300'
         }`}>
-          {displayData.map((edu, idx) => (
+          {education.map((edu, idx) => (
             <div key={edu.id} className="mb-12 ml-8 relative">
               <span className={`absolute -left-[41px] top-1 flex h-5 w-5 items-center justify-center rounded-full ring-2 ${
                 theme === 'dark' ? 'bg-zinc-950 ring-zinc-800' : 'bg-white ring-gray-300'

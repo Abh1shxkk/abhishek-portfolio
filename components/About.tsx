@@ -19,7 +19,7 @@ const About: React.FC = () => {
 
             <Reveal effect={RevealEffect.FADE} delay={200}>
               <p className="text-lg leading-relaxed text-zinc-400">
-                Computer Science Engineering graduate with hands-on experience in Laravel, PHP, JavaScript, and WordPress-based frontend development. Skilled in building responsive and dynamic web applications with a strong foundation in data structures, algorithms, and problem-solving.
+                Computer Science Engineering graduate with hands-on experience in Laravel, PHP, JavaScript, and React-based frontend development. Skilled in building responsive and dynamic web applications with a strong foundation in data structures, algorithms, and problem-solving.
               </p>
             </Reveal>
 
@@ -32,8 +32,8 @@ const About: React.FC = () => {
             <Reveal effect={RevealEffect.SLIDE} delay={600}>
               <div className="flex gap-8 border-l-2 border-zinc-800 pl-6">
                 <div>
-                  <span className="block text-3xl font-bold text-white">1+</span>
-                  <span className="text-sm text-zinc-500">Years Exp</span>
+                  <span className="block text-3xl font-bold text-white">6+</span>
+                  <span className="text-sm text-zinc-500">Months Exp</span>
                 </div>
                 <div>
                   <span className="block text-3xl font-bold text-white">15+</span>

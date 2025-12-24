@@ -36,16 +36,21 @@ const Experience: React.FC = () => {
     fetchExperiences();
   }, []);
 
-  const displayData: ExperienceItem[] = experiences.length > 0 ? experiences : [
-    {
-      id: 1,
-      company: 'Global Matrix Solution',
-      role: 'Full Stack Developer',
-      duration: 'June 2024 — Present',
-      description: 'Building and maintaining dynamic full-stack applications using Laravel, PHP, JavaScript, and React. Delivered key projects including Skills360.ai (job-seeking platform), Medi BillSuite (billing & inventory management), and InvoicePro (invoice & expense management). Focused on performance optimization, responsive UI, real-time features, and SEO-friendly development to enhance overall user experience.',
-      technologies: ['Laravel', 'JavaScript', 'Tailwind CSS', 'React']
-    }
-  ];
+  if (loading) {
+    return (
+      <section id="experience" className={`relative w-full py-24 px-4 ${
+        theme === 'dark' ? 'bg-zinc-900/30' : 'bg-gray-50'
+      }`}>
+        <div className="mx-auto max-w-4xl flex justify-center">
+          <div className="animate-pulse text-zinc-500">Loading experience...</div>
+        </div>
+      </section>
+    );
+  }
+
+  if (experiences.length === 0) {
+    return null;
+  }
 
   return (
     <section id="experience" className={`relative w-full py-24 px-4 ${
@@ -68,7 +73,7 @@ const Experience: React.FC = () => {
         <div className={`relative border-l ml-6 ${
           theme === 'dark' ? 'border-zinc-800' : 'border-gray-300'
         }`}>
-          {displayData.map((exp, idx) => (
+          {experiences.map((exp, idx) => (
             <div key={exp.id} className="mb-12 ml-8 relative">
               <span className={`absolute -left-[41px] top-1 flex h-5 w-5 items-center justify-center rounded-full ring-2 ${
                 theme === 'dark' ? 'bg-zinc-950 ring-zinc-800' : 'bg-white ring-gray-300'

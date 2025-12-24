@@ -1,12 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Reveal from './ui/Reveal';
 import BorderBeamButton from './ui/BorderBeamButton';
 import { Download, Mail } from 'lucide-react';
 import { RevealEffect } from '../types';
 import { useTheme } from '../context/ThemeContext';
 
+interface ProfileData {
+  name?: string;
+  role?: string;
+  bio?: string;
+  resume_url?: string;
+  years_experience?: string;
+}
+
 const Hero: React.FC = () => {
   const { theme } = useTheme();
+  const [profile, setProfile] = useState<ProfileData | null>(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000/api'}/profile`);
+        if (response.ok) {
+          const data = await response.json();
+          setProfile(data);
+        }
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+      }
+    };
+
+    fetchProfile();
+  }, []);
   
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
@@ -57,7 +82,7 @@ const Hero: React.FC = () => {
           <p className={`text-lg leading-relaxed sm:text-xl ${
             theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
           }`}>
-            I'm Abhishek Chauhan, a Full Stack Developer focused on building intersectional digital experiences. I specialize in building responsive and dynamic web applications with Laravel, PHP, JavaScript, and modern frameworks.
+            I'm {profile?.name || 'Abhishek Chauhan'}, a {profile?.role || 'Full Stack Developer'} focused on building intersectional digital experiences. I specialize in building responsive and dynamic web applications with Laravel, PHP, JavaScript, and modern frameworks.
           </p>
         </Reveal>
 
@@ -69,7 +94,9 @@ const Hero: React.FC = () => {
           </BorderBeamButton>
 
           <a
-            href="/resume.pdf"
+            href={profile?.resume_url || '/resume.pdf'}
+            target="_blank"
+            rel="noopener noreferrer"
             className={`inline-flex items-center justify-center gap-2 rounded-full border px-8 py-3 font-medium transition-all ${
               theme === 'dark'
                 ? 'border-zinc-700 bg-zinc-800/50 text-white hover:bg-zinc-800 hover:border-zinc-600'
@@ -86,8 +113,8 @@ const Hero: React.FC = () => {
         }`}>
           <div className="flex flex-wrap justify-center gap-12 sm:gap-24">
             <div className="text-center">
-              <p className={`text-4xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>1+</p>
-              <p className={`text-xs uppercase tracking-wider mt-1 ${theme === 'dark' ? 'text-zinc-500' : 'text-zinc-500'}`}>Years Exp.</p>
+              <p className={`text-4xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>6+</p>
+              <p className={`text-xs uppercase tracking-wider mt-1 ${theme === 'dark' ? 'text-zinc-500' : 'text-zinc-500'}`}>Months Exp.</p>
             </div>
             <div className="text-center">
               <p className={`text-4xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>15+</p>

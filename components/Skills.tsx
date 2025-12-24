@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { DETAILED_SKILLS } from '../constants';
 import Reveal from './ui/Reveal';
 import { RevealEffect } from '../types';
 import { SkillCategory } from '../types';
@@ -28,7 +27,19 @@ const Skills: React.FC = () => {
     fetchSkills();
   }, []);
 
-  const displayData = skills.length > 0 ? skills : DETAILED_SKILLS;
+  if (loading) {
+    return (
+      <section className={`relative w-full py-32 px-4 ${theme === 'light' ? 'bg-gray-50' : 'bg-zinc-950'}`}>
+        <div className="mx-auto max-w-6xl flex justify-center">
+          <div className="animate-pulse text-zinc-500">Loading skills...</div>
+        </div>
+      </section>
+    );
+  }
+
+  if (skills.length === 0) {
+    return null;
+  }
 
   return (
     <section className={`relative w-full py-32 px-4 ${theme === 'light' ? 'bg-gray-50' : 'bg-zinc-950'}`}>
@@ -55,7 +66,7 @@ const Skills: React.FC = () => {
           {/* Right: Skills Grid */}
           <div className="lg:col-span-9">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-12">
-              {displayData.map((category, idx) => (
+              {skills.map((category, idx) => (
                 <Reveal key={idx} effect={RevealEffect.FADE} delay={idx * 100}>
                   <div>
                     <h3 className={`text-xs font-semibold uppercase tracking-wider mb-6 ${

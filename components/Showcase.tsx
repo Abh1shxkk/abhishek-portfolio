@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { PROJECTS } from '../constants';
-import SpotlightCard from './ui/SpotlightCard';
 import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 import Reveal from './ui/Reveal';
 import { RevealEffect, Project } from '../types';
@@ -30,18 +28,17 @@ const Showcase: React.FC = () => {
     fetchProjects();
   }, []);
 
-  const displayData = projects.length > 0 ? projects : PROJECTS;
-
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % displayData.length);
+    setCurrentIndex((prev) => (prev + 1) % projects.length);
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + displayData.length) % displayData.length);
+    setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
   };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (projects.length === 0) return;
       if (e.key === 'ArrowLeft') {
         handlePrev();
       } else if (e.key === 'ArrowRight') {
@@ -51,10 +48,11 @@ const Showcase: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [displayData.length]);
+  }, [projects.length]);
 
   const getCardStyle = (index: number) => {
-    const total = displayData.length;
+    const total = projects.length;
+    if (total === 0) return { display: 'none' };
     let diff = (index - currentIndex + total) % total;
     if (diff > total / 2) diff -= total;
 
@@ -82,6 +80,20 @@ const Showcase: React.FC = () => {
     };
   };
 
+  if (loading) {
+    return (
+      <section id="projects" className={`relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden py-24 ${
+        theme === 'dark' ? 'bg-zinc-950' : 'bg-white'
+      }`}>
+        <div className="animate-pulse text-zinc-500">Loading projects...</div>
+      </section>
+    );
+  }
+
+  if (projects.length === 0) {
+    return null;
+  }
+
   return (
     <section id="projects" className={`relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden py-24 ${
       theme === 'dark' ? 'bg-zinc-950' : 'bg-white'
@@ -101,7 +113,7 @@ const Showcase: React.FC = () => {
       </div>
 
       <div className="relative flex h-[500px] w-full max-w-6xl items-center justify-center">
-        {displayData.map((project, index) => (
+        {projects.map((project, index) => (
           <div
             key={project.id}
             className="absolute w-[350px] sm:w-[500px]"
@@ -185,7 +197,7 @@ const Showcase: React.FC = () => {
       </div>
 
       <Reveal effect={RevealEffect.FADE} delay={300} className="mt-8 flex justify-center gap-2">
-        {displayData.map((_, idx) => (
+        {projects.map((_, idx) => (
           <button
             key={idx}
             onClick={() => setCurrentIndex(idx)}

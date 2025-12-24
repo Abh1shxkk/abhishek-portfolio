@@ -35,12 +35,19 @@ const Profile: React.FC = () => {
     fetchProfile();
   }, []);
 
-  const displayData: ProfileData = profile || {
-    bio: 'Computer Science Engineering graduate with hands-on experience in Laravel, PHP, JavaScript, and React-based frontend development. Skilled in building responsive and dynamic web applications with a strong foundation in data structures, algorithms, and problem-solving. Currently expanding expertise in backend development, focusing on databases, APIs, and server-side programming, with the goal of transitioning into a backend engineering role.',
-    location: 'Meerut, UP',
-    experience: '6+ Months',
-    availability: 'Open'
-  };
+  if (loading) {
+    return (
+      <section id="profile" className={`relative w-full py-32 px-4 min-h-[80vh] flex items-center justify-center ${
+        theme === 'dark' ? 'bg-zinc-950' : 'bg-white'
+      }`}>
+        <div className="animate-pulse text-zinc-500">Loading profile...</div>
+      </section>
+    );
+  }
+
+  if (!profile) {
+    return null;
+  }
 
   return (
     <section id="profile" className={`relative w-full py-32 px-4 min-h-[80vh] flex items-center ${
@@ -69,9 +76,9 @@ const Profile: React.FC = () => {
                   <div className={`h-full w-full rounded-2xl flex items-center justify-center overflow-hidden ${
                     theme === 'dark' ? 'bg-zinc-900' : 'bg-gray-100'
                   }`}>
-                    {displayData.avatar ? (
+                    {profile.avatar ? (
                       <img 
-                        src={displayData.avatar} 
+                        src={profile.avatar} 
                         alt="Profile" 
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" 
                       />
@@ -91,7 +98,7 @@ const Profile: React.FC = () => {
               <p className={`text-xl leading-relaxed ${
                 theme === 'dark' ? 'text-zinc-300' : 'text-zinc-600'
               }`}>
-                {displayData.bio}
+                {profile.bio}
               </p>
             </Reveal>
 
@@ -102,11 +109,11 @@ const Profile: React.FC = () => {
               }`}>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">Location</p>
-                  <p className={`text-lg font-medium ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>{displayData.location}</p>
+                  <p className={`text-lg font-medium ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>{profile.location}</p>
                 </div>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">Experience</p>
-                  <p className={`text-lg font-medium ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>{displayData.experience}</p>
+                  <p className={`text-lg font-medium ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>{profile.experience}</p>
                 </div>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">Availability</p>
@@ -115,7 +122,7 @@ const Profile: React.FC = () => {
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                     </span>
-                    {displayData.availability}
+                    {profile.availability}
                   </p>
                 </div>
               </div>

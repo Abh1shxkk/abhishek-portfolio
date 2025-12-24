@@ -10,11 +10,11 @@ Location: Meerut, UP
 Email: abhichauhan200504@gmail.com
 Phone: +91 8279422813
 Experience:
-- Full Stack Developer at Motify Online (2025 - Present): Building and maintaining dynamic, full-stack applications using Laravel, PHP, JavaScript, and WordPress. Delivered key projects including a job-seeking platform (CatchBoi), a personalized matchmaking app (LoveMeet), and a migration services website (Ketan Gagan). Focused on performance optimization, responsive UI, real time features, and SEO-friendly development to enhance overall user experience.
-Skills: Laravel, PHP, JavaScript, React, Node.js, MySQL, PostgreSQL, WordPress, Tailwind CSS, Bootstrap, Framer Motion, Alpine.js, Docker, AWS, Git.
-Bio: Computer Science Engineering graduate with hands-on experience in Laravel, PHP, JavaScript, and WordPress-based frontend development. Skilled in building responsive and dynamic web applications with a strong foundation in data structures, algorithms, and problem-solving. Currently expanding expertise in backend development, focusing on databases, APIs, and server-side programming, with the goal of transitioning into a backend engineering role.
+- Full Stack Developer at Global Matrix Solution (September 2025 - Present): Building and maintaining dynamic, full-stack applications using Laravel, PHP, JavaScript, and React. Delivered key projects including Skills360.ai (job-seeking platform), Medi BillSuite (billing & inventory management), and InvoicePro (invoice & expense management). Focused on performance optimization, responsive UI, real time features, and SEO-friendly development to enhance overall user experience.
+Skills: Laravel, PHP, JavaScript, React, Node.js, MySQL, PostgreSQL, Tailwind CSS, Bootstrap, Framer Motion, Alpine.js, Docker, AWS, Git.
+Bio: Computer Science Engineering graduate with hands-on experience in Laravel, PHP, JavaScript, and React-based frontend development. Skilled in building responsive and dynamic web applications with a strong foundation in data structures, algorithms, and problem-solving. Currently expanding expertise in backend development, focusing on databases, APIs, and server-side programming, with the goal of transitioning into a backend engineering role.
 Availability: Open
-Experience Years: 1+ Years
+Experience Years: 6+ Months
 `;
 
 export const PROJECTS: Project[] = [
