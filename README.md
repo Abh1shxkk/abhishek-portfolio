@@ -1,9 +1,10 @@
 # Abhishek Portfolio
 
-A modern, full-stack developer portfolio built with React + TypeScript frontend and Laravel backend. Features admin dashboard, and beautiful animations.
+A modern, full-stack developer portfolio built with React + TypeScript frontend and Laravel backend. Features a beautiful Filament admin dashboard for content management.
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
 ![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white)
+![Filament](https://img.shields.io/badge/Filament-3.3-FDAE4B?logo=laravel&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white)
 ![Tailwind](https://img.shields.io/badge/Tailwind-CSS-06B6D4?logo=tailwindcss&logoColor=white)
 
@@ -11,20 +12,22 @@ A modern, full-stack developer portfolio built with React + TypeScript frontend 
 
 ## Features
 
-- **Admin Dashboard** - Full content management system
+- **Filament Admin Dashboard** - Beautiful, modern admin panel for managing all portfolio content
 - **Dark/Light Theme** - Toggle with persistent preference
 - **Smooth Animations** - Reveal effects, spotlight cards, marquee
 - **Project Carousel** - Interactive 3D card showcase
 - **Responsive Design** - Works on all devices
+- **API-Driven Content** - All content fetched from Laravel API
 
 ---
 
 ## Tech Stack
 
-**Frontend:** React 19, TypeScript, Vite, Tailwind CSS, React Router, Lucide Icons
+**Frontend:** React 19, TypeScript, Vite, Tailwind CSS, Framer Motion, Lucide Icons
 
-**Backend:** Laravel 12, PHP 8.2+, Laravel Sanctum, MySQL/SQLite
+**Backend:** Laravel 12, PHP 8.2+, Filament 3.3, MySQL/PostgreSQL
 
+**Admin Panel:** Laravel Filament with custom theme matching portfolio design
 
 ---
 
@@ -38,9 +41,9 @@ npm install
 
 # Add environment variables
 cp .env.local.example .env.local
-# Set GEMINI_API_KEY and VITE_API_URL
+# Set VITE_API_URL=http://localhost:8000/api
 
-# Run dev server
+# Run dev server (port 3000)
 npm run dev
 ```
 
@@ -55,11 +58,37 @@ composer install
 # Setup environment
 cp .env.example .env
 php artisan key:generate
-php artisan migrate
 
-# Run server
+# Run migrations and seed data
+php artisan migrate
+php artisan db:seed
+
+# Run server (port 8000)
 php artisan serve
 ```
+
+### Admin Dashboard
+
+Access the admin panel at: `http://localhost:8000/admin`
+
+Default credentials:
+- Email: `admin@admin.com`
+- Password: `admin123`
+
+---
+
+## Admin Dashboard Features
+
+The Filament admin dashboard allows you to manage:
+
+| Section | Description |
+|---------|-------------|
+| **My Profile** | Name, role, bio, avatar, resume URL, contact info |
+| **Work Experience** | Job positions, companies, duration, descriptions, tech tags |
+| **Skills** | Skill categories with technology items |
+| **Projects** | Project showcase with images, descriptions, links, tags |
+| **Education** | Degrees, schools, years |
+| **Social Links** | GitHub, LinkedIn, Twitter, etc. |
 
 ---
 
@@ -67,27 +96,30 @@ php artisan serve
 
 ```
 ├── components/
-│   ├── admin/          # Admin panel (Dashboard, Login, CRUD pages)
-│   ├── ui/             # Reusable UI (Buttons, Cards, Animations)
+│   ├── ui/             # Reusable UI components
 │   ├── Hero.tsx        # Landing section
 │   ├── Profile.tsx     # Bio & stats
 │   ├── Experience.tsx  # Work timeline
 │   ├── Skills.tsx      # Tech skills grid
 │   ├── Showcase.tsx    # Project carousel
 │   ├── Education.tsx   # Education timeline
-│   ├── Contact.tsx     # Social links
-│   └── AIChat.tsx      # AI chatbot
-├── services/
-│   ├── geminiService.ts    # AI integration
-│   └── portfolioApi.ts     # API calls
+│   └── Contact.tsx     # Social links
 ├── context/
 │   └── ThemeContext.tsx    # Theme provider
+├── services/
+│   └── portfolioApi.ts     # API calls
 ├── portfolio-api/          # Laravel backend
-│   ├── app/Http/Controllers/
-│   ├── app/Models/
-│   ├── database/migrations/
+│   ├── app/
+│   │   ├── Filament/       # Admin panel resources
+│   │   │   ├── Resources/  # CRUD resources
+│   │   │   └── Widgets/    # Dashboard widgets
+│   │   ├── Http/Controllers/
+│   │   └── Models/
+│   ├── database/
+│   │   ├── migrations/
+│   │   └── seeders/
 │   └── routes/api.php
-└── App.tsx                 # Main app with routing
+└── App.tsx                 # Main app
 ```
 
 ---
@@ -105,31 +137,19 @@ php artisan serve
 | GET | `/api/socials` | Social links |
 | POST | `/api/contact` | Contact form |
 
-### Admin (Protected)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/admin/login` | Login |
-| GET/PUT | `/api/admin/profile` | Manage profile |
-| CRUD | `/api/admin/experiences` | Manage experience |
-| CRUD | `/api/admin/skills` | Manage skills |
-| CRUD | `/api/admin/projects` | Manage projects |
-| CRUD | `/api/admin/education` | Manage education |
-| CRUD | `/api/admin/socials` | Manage socials |
-
 ---
 
 ## Environment Variables
 
 **Frontend (.env.local)**
 ```
-GEMINI_API_KEY=your_key
 VITE_API_URL=http://localhost:8000/api
 ```
 
 **Backend (portfolio-api/.env)**
 ```
 DB_CONNECTION=mysql
-DB_DATABASE=portfolio
+DB_DATABASE=pf_db
 DB_USERNAME=root
 DB_PASSWORD=
 ```
@@ -140,13 +160,16 @@ DB_PASSWORD=
 
 **Frontend:** Build with `npm run build`, deploy `dist/` folder
 
-**Backend:** Use included `Dockerfile` or deploy to Render/Railway
+**Backend:** 
+- Production URL: `https://abhishek-portfolio-kfdk.onrender.com`
+- Uses PostgreSQL on Render
+- Dockerfile included for containerized deployment
 
 ---
 
 ## Author
 
-**Abhishek Chauhan**
+**Abhishek Chauhan** - Full Stack Developer
 
 - GitHub: [@Abh1shxkk](https://github.com/Abh1shxkk)
 - LinkedIn: [Abhishek Chauhan](https://www.linkedin.com/in/abhishek-chauhan-880496394)

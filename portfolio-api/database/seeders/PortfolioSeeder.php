@@ -15,8 +15,21 @@ class PortfolioSeeder extends Seeder
 {
     public function run(): void
     {
-        // Disable foreign key checks for PostgreSQL
-        DB::statement('TRUNCATE TABLE profiles, experience, skills, projects, education, social_links RESTART IDENTITY CASCADE');
+        // Clear tables - works for both MySQL and PostgreSQL
+        $driver = DB::getDriverName();
+        
+        if ($driver === 'pgsql') {
+            DB::statement('TRUNCATE TABLE profiles, experience, skills, projects, education, social_links RESTART IDENTITY CASCADE');
+        } else {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0');
+            DB::table('profiles')->truncate();
+            DB::table('experience')->truncate();
+            DB::table('skills')->truncate();
+            DB::table('projects')->truncate();
+            DB::table('education')->truncate();
+            DB::table('social_links')->truncate();
+            DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        }
 
         // Profile
         Profile::create([

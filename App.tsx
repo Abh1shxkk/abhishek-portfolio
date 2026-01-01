@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import Hero from './components/Hero';
 import Marquee from './components/Marquee';
@@ -9,26 +8,9 @@ import Skills from './components/Skills';
 import Showcase from './components/Showcase';
 import Education from './components/Education';
 import Contact from './components/Contact';
-import AdminLogin from './components/admin/AdminLogin';
-import AdminDashboard from './components/admin/AdminDashboard';
-import AdminProfile from './components/admin/AdminProfile';
-import AdminExperience from './components/admin/AdminExperience';
-import AdminSkills from './components/admin/AdminSkills';
-import AdminProjects from './components/admin/AdminProjects';
-import AdminEducation from './components/admin/AdminEducation';
-import AdminSocials from './components/admin/AdminSocials';
 import { Sun, Moon } from 'lucide-react';
 
-// Protected Route Component
-const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const token = localStorage.getItem('admin_token');
-  if (!token) {
-    return <Navigate to="/admin/login" replace />;
-  }
-  return <>{children}</>;
-};
-
-function PortfolioContent() {
+function AppContent() {
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -96,22 +78,7 @@ function PortfolioContent() {
 function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter>
-        <Routes>
-          {/* Portfolio Routes */}
-          <Route path="/" element={<PortfolioContent />} />
-          
-          {/* Admin Routes */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-          <Route path="/admin/profile" element={<ProtectedRoute><AdminProfile /></ProtectedRoute>} />
-          <Route path="/admin/experience" element={<ProtectedRoute><AdminExperience /></ProtectedRoute>} />
-          <Route path="/admin/skills" element={<ProtectedRoute><AdminSkills /></ProtectedRoute>} />
-          <Route path="/admin/projects" element={<ProtectedRoute><AdminProjects /></ProtectedRoute>} />
-          <Route path="/admin/education" element={<ProtectedRoute><AdminEducation /></ProtectedRoute>} />
-          <Route path="/admin/socials" element={<ProtectedRoute><AdminSocials /></ProtectedRoute>} />
-        </Routes>
-      </BrowserRouter>
+      <AppContent />
     </ThemeProvider>
   );
 }
