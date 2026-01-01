@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use App\Models\Profile;
 use App\Models\Experience;
 use App\Models\Skill;
@@ -14,13 +15,8 @@ class PortfolioSeeder extends Seeder
 {
     public function run(): void
     {
-        // Clear existing data first
-        Profile::truncate();
-        Experience::truncate();
-        Skill::truncate();
-        Project::truncate();
-        Education::truncate();
-        SocialLink::truncate();
+        // Disable foreign key checks for PostgreSQL
+        DB::statement('TRUNCATE TABLE profiles, experience, skills, projects, education, social_links RESTART IDENTITY CASCADE');
 
         // Profile
         Profile::create([
@@ -29,7 +25,7 @@ class PortfolioSeeder extends Seeder
             'location' => 'Meerut, UP',
             'email' => 'abhichauhan200504@gmail.com',
             'phone' => '+91 8279422813',
-            'bio' => '🚀 Computer Science Engineering graduate with hands-on experience in Laravel, PHP, JavaScript, and React-based frontend development. Skilled in building responsive and dynamic web applications with a strong foundation in data structures, algorithms, and problem-solving. Currently expanding expertise in backend development, focusing on databases, APIs, and server-side programming, with the goal of transitioning into a backend engineering role.',
+            'bio' => 'Computer Science Engineering graduate with hands-on experience in Laravel, PHP, JavaScript, and React-based frontend development. Skilled in building responsive and dynamic web applications with a strong foundation in data structures, algorithms, and problem-solving. Currently expanding expertise in backend development, focusing on databases, APIs, and server-side programming, with the goal of transitioning into a backend engineering role.',
             'availability' => 'Open',
             'years_experience' => '6+ Months',
             'avatar' => 'https://res.cloudinary.com/dfsdezrkr/image/upload/v1766513936/image_3_sesdcl.png',

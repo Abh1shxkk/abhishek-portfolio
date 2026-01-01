@@ -16,12 +16,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create test user directly without factory
-        User::create([
-            'name' => 'Abhishek Chauhan',
-            'email' => 'abhichauhan200504@gmail.com',
-            'password' => Hash::make('password'),
-        ]);
+        // Create test user only if not exists
+        User::firstOrCreate(
+            ['email' => 'abhichauhan200504@gmail.com'],
+            [
+                'name' => 'Abhishek Chauhan',
+                'password' => Hash::make('password'),
+            ]
+        );
         
         $this->call(PortfolioSeeder::class);
     }
